@@ -7,51 +7,126 @@
 //
 
 import UIKit
-
-private let reuseIdentifier = "Cell"
+import Parse
 
 class homeVC: UICollectionViewController {
+    
+    // refresher variable
+    var refresher : UIRefreshControl!
+    
+    // size of page
+    var page : Int = 10
+    
+    var uuidArray = [String]()
+    var picArray = [PFFile]()
+    
 
+    // default function
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // background color
+        collectionView?.backgroundColor = UIColor.white
+        
+        // title at the top
+        self.navigationItem.title = PFUser.current()?.username?.uppercased()
+        
+        
+        // pull down to refresh
+        refresher = UIRefreshControl()
+        refresher.addTarget(self, action: "refresh", for: UIControlEvents.valueChanged)
+        collectionView?.addSubview(refresher)
+        
+        // load posts function
+        loadPosts()
+        
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+           }
 
-        // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
-        // Do any additional setup after loading the view.
+    // refreshing function
+    func refresh() {
+        
+        // reload data information
+        collectionView?.reloadData()
+        
+        // stop refresher animation 
+        refresher.endRefreshing()
+    }
+    
+    // upload posts function
+    func loadPosts() {
+        let query = PFQuery(className: "posts")
+        query.whereKey("username", equalTo: PFUser.current()!.username!)
+        query.limit = page
+        query.findObjectsInBackground (block: { (objects:[PFObject]?, error: Error?) -> Void in
+            if error == nil {
+                
+                // clean up
+                self.uuidArray.removeAll(keepingCapacity: false)
+                self.picArray.removeAll(keepingCapacity: false)
+                
+                // find objects related to our request
+                for object in objects! {
+                    
+                    // add found data to Arrays (holders)
+                    self.uuidArray.append(object.value(forKey: "uuid") as! String)
+                    self.picArray.append(object.value(forKey: "pic") as! PFFile)
+                }
+                
+                self.collectionView?.reloadData()
+            } else {
+                print(error!.localizedDescription)
+            }
+        })
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+
+    // number of cells
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of items
+        return picArray.count
+    }
+    
+    // cell configuration
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        // define Cell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! pictureCell
+        
+        // get picture from the picArray
+        picArray[indexPath.row].getDataInBackground { (data: Data?, error: Error?) in
+            if error == nil {
+                cell.picImg.image = UIImage(data: data!)
+            }
+        }
+        
+        return cell
+    }
+
+    // cell config
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        // define header
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "Header", for: indexPath) as! headerView
+        
+        // get user data with conection to collums of PFUser class
+        header.fullnameLbl.text = (PFUser.current()?.object(forKey: "fullname") as? String)?.uppercased()
+        header.webTxt.text = PFUser.current()?.object(forKey: "web") as? String
+        header.webTxt.sizeToFit()
+        header.bioLbl.text = PFUser.current()?.object(forKey: "bio") as? String
+        header.bioLbl.sizeToFit()
+        
+        let avaQuery = PFUser.current()?.object(forKey: "ava") as? PFFile
+        avaQuery?.getDataInBackground(block: { (data: Data?, error: Error?) -> Void in
+            header.avaImg.image = UIImage(data: data!)
+        })
+        header.button.setTitle("edit profile", for: UIControlState.normal)
+        
+        return header
+
     }
 
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-    // MARK: UICollectionViewDataSource
-
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
-
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 0
-    }
-
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
     
@@ -59,6 +134,7 @@ class homeVC: UICollectionViewController {
     
         return cell
     }
+    */
 
     // MARK: UICollectionViewDelegate
 

@@ -256,6 +256,9 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
+                    <connections>
+                        <segue destination="Wg6-LD-NPF" kind="relationship" relationship="viewControllers" id="5fX-yd-RmG"/>
+                    </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7f3-Wd-hdL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -264,27 +267,27 @@
         <!--HomeVC-->
         <scene sceneID="ArM-bH-iPv">
             <objects>
-                <collectionViewController id="w42-dm-Fb4" customClass="homeVC" customModule="truevinter" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="homeVC" id="w42-dm-Fb4" customClass="homeVC" customModule="truevinter" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="WaV-LK-RDk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="K1D-6g-ORM">
-                            <size key="itemSize" width="106" height="106"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="K1D-6g-ORM">
+                            <size key="itemSize" width="124" height="124"/>
                             <size key="headerReferenceSize" width="50" height="240"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="Epv-0i-wj2" customClass="pictureCell" customModule="truevinter" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="240" width="106" height="106"/>
+                                <rect key="frame" x="0.0" y="240" width="124" height="124"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="106" height="106"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="124" height="124"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="gm3-sN-T4P">
-                                            <rect key="frame" x="0.0" y="0.0" width="106" height="106"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="124" height="124"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
                                     </subviews>
@@ -310,13 +313,14 @@
                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" text="www.vinter.tv" textAlignment="natural" id="KjS-Md-ayO">
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" text="www.vinter.tv" textAlignment="natural" id="KjS-Md-ayO">
                                     <rect key="frame" x="16" y="127" width="336" height="34"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                 </textView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="This and that..." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="X8C-XF-SC4">
                                     <rect key="frame" x="20" y="156" width="347" height="76"/>
@@ -396,8 +400,28 @@
                             <outlet property="delegate" destination="w42-dm-Fb4" id="KN7-Ml-qk4"/>
                         </connections>
                     </collectionView>
+                    <navigationItem key="navigationItem" id="sph-wG-KTM"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qVt-0f-Bo8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2518" y="-28"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="Y1n-Hz-H0F">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Wg6-LD-NPF" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="uFr-C6-8kJ"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="P8R-w4-w4e">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="w42-dm-Fb4" kind="relationship" relationship="rootViewController" id="lPe-FD-t97"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VaI-M1-CKG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2052.5" y="-27.5"/>
         </scene>

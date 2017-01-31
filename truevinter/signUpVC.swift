@@ -163,7 +163,7 @@ class signUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         user.password = passwordTxt.text
         user["fullname"] = fullNameTxt.text?.lowercased()
         user["bio"] = bioTxt.text?.lowercased()
-        user["web"] = bioTxt.text?.lowercased()
+        user["web"] = webTxt.text?.lowercased()
         
         // to be assigned in the Edit Profile page
         user["tel"] = ""
