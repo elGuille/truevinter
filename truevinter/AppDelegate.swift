@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // configuration of using Parse code in Heroku
+        let parseConfig = ParseClientConfiguration { (ParseMutableClientConfiguration) in
+            
+            // accesing Heroku via ID, server & Keys
+            ParseMutableClientConfiguration.applicationId = "realvinter+*9u902ioklv23SDJO"
+            ParseMutableClientConfiguration.clientKey = "realvinterKey2348+*SDj90"
+            ParseMutableClientConfiguration.server = "http://realvinter.herokuapp.com/parse"
+        }
+        
+        Parse.initialize(with: parseConfig)
+        
+        // call login function
+        login()
+        
         return true
     }
 
@@ -41,6 +57,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    func login() {
+        
+        // remember user's login
+        let username : String? = UserDefaults.standard.string(forKey: "username")
+        
+        // if logged in
+        if username != nil {
+            
+            let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let myTabBar = storyboard.instantiateViewController(withIdentifier: "tabBar") as! UITabBarController
+            window?.rootViewController = myTabBar
+        }
+    }
 
 }
 
