@@ -387,8 +387,8 @@
                                 <outlet property="button" destination="eXT-Zz-cgg" id="nGY-gq-Mvb"/>
                                 <outlet property="followers" destination="o4e-5Z-E9T" id="IP6-8R-543"/>
                                 <outlet property="followersTitle" destination="Ned-ly-POQ" id="4G4-Ix-zAr"/>
-                                <outlet property="following" destination="DJa-ML-rOz" id="ima-qZ-aCk"/>
                                 <outlet property="followingTitle" destination="Ls2-TI-UFj" id="jte-pd-3lt"/>
+                                <outlet property="followings" destination="DJa-ML-rOz" id="hfl-JE-qZ6"/>
                                 <outlet property="fullnameLbl" destination="inT-WT-xsY" id="llX-Cf-MhT"/>
                                 <outlet property="posts" destination="oN0-gk-mA1" id="sRs-jB-bUA"/>
                                 <outlet property="postsTitle" destination="WKc-rp-LDj" id="D3w-bb-AE1"/>
@@ -405,6 +405,61 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qVt-0f-Bo8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2518" y="-28"/>
+        </scene>
+        <!--FollowersVC-->
+        <scene sceneID="LOQ-Px-P6Q">
+            <objects>
+                <tableViewController storyboardIdentifier="followersVC" id="TrI-oS-Y46" customClass="followersVC" customModule="truevinter" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" id="Omq-3l-wEI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="80" id="feJ-EG-YSV" customClass="followersCell" customModule="truevinter" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="80"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="feJ-EG-YSV" id="zT2-50-fXD">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="profile.png" id="BLJ-pv-OTp">
+                                            <rect key="frame" x="10" y="10" width="60" height="60"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QcL-6f-ts9">
+                                            <rect key="frame" x="86" y="29" width="175" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="zZb-y1-s3t">
+                                            <rect key="frame" x="269" y="26" width="98" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <state key="normal" title="FOLLOWING">
+                                                <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            </state>
+                                        </button>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="avaImg" destination="BLJ-pv-OTp" id="bBJ-B6-QJ8"/>
+                                    <outlet property="followBtn" destination="zZb-y1-s3t" id="R8A-ck-0kj"/>
+                                    <outlet property="usernameLbl" destination="QcL-6f-ts9" id="81S-09-XhI"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="TrI-oS-Y46" id="eUM-V5-2Ko"/>
+                            <outlet property="delegate" destination="TrI-oS-Y46" id="OiW-i6-rX9"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X5d-Ug-ggL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2985.5" y="-28.5"/>
         </scene>
         <!--Item-->
         <scene sceneID="Y1n-Hz-H0F">

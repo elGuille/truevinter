@@ -33,6 +33,8 @@
 		22A941821E367B9000DF2F1A /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22A941811E367B9000DF2F1A /* Roboto-Regular.ttf */; };
 		22FA06B61E40E1150068BE58 /* headerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FA06B51E40E1150068BE58 /* headerView.swift */; };
 		22FA06B81E40E42C0068BE58 /* pictureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FA06B71E40E42C0068BE58 /* pictureCell.swift */; };
+		22FA06BA1E4251A90068BE58 /* followersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FA06B91E4251A90068BE58 /* followersVC.swift */; };
+		22FA06BC1E4251E90068BE58 /* followersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FA06BB1E4251E90068BE58 /* followersCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +66,8 @@
 		22A941811E367B9000DF2F1A /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		22FA06B51E40E1150068BE58 /* headerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = headerView.swift; sourceTree = "<group>"; };
 		22FA06B71E40E42C0068BE58 /* pictureCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = pictureCell.swift; sourceTree = "<group>"; };
+		22FA06B91E4251A90068BE58 /* followersVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = followersVC.swift; sourceTree = "<group>"; };
+		22FA06BB1E4251E90068BE58 /* followersCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = followersCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +152,8 @@
 				2247EB6C1E40DD7A0083E041 /* homeVC.swift */,
 				22FA06B51E40E1150068BE58 /* headerView.swift */,
 				22FA06B71E40E42C0068BE58 /* pictureCell.swift */,
+				22FA06B91E4251A90068BE58 /* followersVC.swift */,
+				22FA06BB1E4251E90068BE58 /* followersCell.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -242,6 +248,8 @@
 			files = (
 				22FA06B81E40E42C0068BE58 /* pictureCell.swift in Sources */,
 				2267797A1E3665AF00653256 /* signUpVC.swift in Sources */,
+				22FA06BC1E4251E90068BE58 /* followersCell.swift in Sources */,
+				22FA06BA1E4251A90068BE58 /* followersVC.swift in Sources */,
 				226779781E36659D00653256 /* signInVC.swift in Sources */,
 				2247EB6D1E40DD7A0083E041 /* homeVC.swift in Sources */,
 				2267794B1E361EFC00653256 /* AppDelegate.swift in Sources */,

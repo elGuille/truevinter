@@ -103,12 +103,13 @@ class homeVC: UICollectionViewController {
         return cell
     }
 
-    // cell config
+    // header config
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         // define header
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "Header", for: indexPath) as! headerView
         
+        // STEP 1. Get user data
         // get user data with conection to collums of PFUser class
         header.fullnameLbl.text = (PFUser.current()?.object(forKey: "fullname") as? String)?.uppercased()
         header.webTxt.text = PFUser.current()?.object(forKey: "web") as? String
@@ -122,8 +123,91 @@ class homeVC: UICollectionViewController {
         })
         header.button.setTitle("edit profile", for: UIControlState.normal)
         
+        
+        // STEP 2. Count statistics
+        // count total posts
+        let posts = PFQuery(className: "posts")
+        posts.whereKey("username", equalTo: PFUser.current()?.username)
+        posts.countObjectsInBackground (block: { (count: Int32, error: Error?) in
+            if error == nil {
+                header.posts.text = "\(count)"
+            }
+        })
+        
+        // count total followers
+        let followers = PFQuery(className: "follow")
+        followers.whereKey("following", equalTo: PFUser.current()?.username)
+        followers.countObjectsInBackground (block: { (count: Int32, error: Error?) in
+            if error == nil {
+                header.followers.text = "\(count)"
+            }
+        })
+        
+        // count total followings
+        let followings = PFQuery(className: "follow")
+        followings.whereKey("follower", equalTo: PFUser.current()?.username)
+        followings.countObjectsInBackground (block: { (count: Int32, error: Error?) in
+            if error == nil {
+                header.followings.text = "\(count)"
+            }
+        })
+        
+        // STEP 3. Implement tap gestures
+        // tap posts
+        let postsTap = UITapGestureRecognizer(target: self, action: "postsTap")
+        postsTap.numberOfTapsRequired = 1
+        header.posts.isUserInteractionEnabled = true
+        header.posts.addGestureRecognizer(postsTap)
+        
+        // tap followers
+        let followersTap = UITapGestureRecognizer(target: self, action: "followersTap")
+        followersTap.numberOfTapsRequired = 1
+        header.followers.isUserInteractionEnabled = true
+        header.followers.addGestureRecognizer(followersTap)
+        
+        // tap following
+        let followingTap = UITapGestureRecognizer(target: self, action: "followingTap")
+        followingTap.numberOfTapsRequired = 1
+        header.followings.isUserInteractionEnabled = true
+        header.followings.addGestureRecognizer(followingTap)
+        
         return header
 
+    }
+    // MARK
+    // tapped posts label
+    func postsTap() {
+        if !picArray.isEmpty {
+            let index = NSIndexPath(item: 0, section: 0)
+            self.collectionView?.scrollToItem(at: index as IndexPath, at: UICollectionViewScrollPosition.top, animated: true)
+        }
+    }
+    
+    // tapped followers label
+    func followersTap() {
+        
+        user = PFUser.current()!.username!
+        shows = "followers"
+        
+        
+        // make references to followersVC
+        let followers = self.storyboard?.instantiateViewController(withIdentifier: "followersVC") as! followersVC
+        
+        // present it
+        self.navigationController?.pushViewController(followers, animated: true)
+        
+    }
+    
+    // tapped following label
+    func followingTap() {
+        user = PFUser.current()!.username!
+        shows = "following"
+        
+        // make references to followersVC
+        let followings = self.storyboard?.instantiateViewController(withIdentifier: "followersVC") as! followersVC
+        
+        // present it
+        self.navigationController?.pushViewController(followings, animated: true)
     }
 
     /*
